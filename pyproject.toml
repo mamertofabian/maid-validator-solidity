@@ -1,0 +1,36 @@
+[project]
+name = "maid-validator-solidity"
+version = "0.1.0"
+description = "Solidity language validator plugin for MAID Runner, backed by tree-sitter-solidity."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Mamerto Fabian Jr.", email = "mamerto@codefrost.com"}]
+dependencies = [
+    "maid-runner>=2.24,<3",
+    "tomli>=2; python_version < '3.11'",
+    "tree-sitter>=0.25,<0.26",
+    "tree-sitter-solidity>=1.2.13,<2",
+]
+
+[project.entry-points."maid_runner.validators"]
+solidity = "maid_validator_solidity:SolidityValidator"
+
+[dependency-groups]
+dev = ["pytest>=8.4,<10", "black>=25", "ruff>=0.13"]
+
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["maid_validator_solidity*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py310"

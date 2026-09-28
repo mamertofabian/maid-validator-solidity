@@ -1,0 +1,336 @@
+{
+  "manifest_path": "manifests/solidity-validator-plugin.manifest.yaml",
+  "manifest_hash": "sha256-contract:cd0eef29f11cad683390525ec8e5b8d2d09f5fb6169d60e4e191e23a38713e40",
+  "test_hashes": {
+    "tests/test_implementation.py": "sha256-pyast:v2:42420b84df88ad0e686790f33b61b97ea6172d331a5ef1cdf3b21558606169e0",
+    "tests/test_behavioral.py": "sha256-pyast:v2:49a456bc88a036e7acecac3e42a755acf40a76379573b601621e28d8c8998474",
+    "tests/test_types.py": "sha256-pyast:v2:78ab2e249e9e7701142d48dd94d6fac86f3164e592b7e7db78144f22ca8160f3",
+    "tests/test_conformance.py": "sha256-pyast:v2:8543294acaac6cb13535e3b83b0920237c2b91ff78ebfee5531fe1e10eb6888d",
+    "tests/test_registration.py": "sha256-pyast:v2:affda34ee68b0a0442a8996e9bccbbdd70e9395931fb7fd37a82eda71999582a"
+  },
+  "created_at": "2026-09-28T10:57:48.748399+00:00",
+  "revision": 6,
+  "revisions": [
+    {
+      "prior_manifest_hash": "sha256-contract:1af161e414c3ede4785210bc230e6dd008202e8bc9732d37847be828654e3ca2",
+      "prior_test_hashes": {
+        "tests/test_implementation.py": "sha256-pyast:v2:503cf571fd72c7124a3a3d255af955ea6becac78dfb265d2758fd0f96dc09f40",
+        "tests/test_behavioral.py": "sha256-pyast:v2:463e29e34a8265f3166fd61508a456698eaa46db9d92094314622a323077b112",
+        "tests/test_types.py": "sha256-pyast:v2:78ab2e249e9e7701142d48dd94d6fac86f3164e592b7e7db78144f22ca8160f3",
+        "tests/test_conformance.py": "sha256-pyast:v2:ab3fba36e1949c846a2fc101c430222b6d9585d825351ed408e18b10cf3c8f17",
+        "tests/test_registration.py": "sha256-pyast:v2:affda34ee68b0a0442a8996e9bccbbdd70e9395931fb7fd37a82eda71999582a"
+      },
+      "revised_at": "2026-09-28T10:58:10.970404+00:00",
+      "reason": "Migrated by maid manifest promote: manifests/drafts/solidity-validator-plugin.manifest.yaml -> manifests/solidity-validator-plugin.manifest.yaml",
+      "agent": null,
+      "contract_delta": {
+        "artifacts_added": [],
+        "artifacts_removed": [],
+        "files_added": [],
+        "files_removed": [],
+        "validate_commands_added": [],
+        "validate_commands_removed": []
+      }
+    },
+    {
+      "prior_manifest_hash": "sha256-contract:39644210164d401cb004eb6503c6207bb1e6e21b60deacb17c0e05f7515b5a00",
+      "prior_test_hashes": {
+        "tests/test_implementation.py": "sha256-pyast:v2:503cf571fd72c7124a3a3d255af955ea6becac78dfb265d2758fd0f96dc09f40",
+        "tests/test_behavioral.py": "sha256-pyast:v2:463e29e34a8265f3166fd61508a456698eaa46db9d92094314622a323077b112",
+        "tests/test_types.py": "sha256-pyast:v2:78ab2e249e9e7701142d48dd94d6fac86f3164e592b7e7db78144f22ca8160f3",
+        "tests/test_conformance.py": "sha256-pyast:v2:ab3fba36e1949c846a2fc101c430222b6d9585d825351ed408e18b10cf3c8f17",
+        "tests/test_registration.py": "sha256-pyast:v2:affda34ee68b0a0442a8996e9bccbbdd70e9395931fb7fd37a82eda71999582a"
+      },
+      "revised_at": "2026-09-28T11:04:19.843140+00:00",
+      "reason": "Use the Python collector canonical spelling tuple[str, Ellipsis] for the unchanged tuple[str, ...] return annotation; API behavior, test files and commands are unchanged.",
+      "agent": null,
+      "contract_delta": {
+        "artifacts_added": [
+          "src/maid_validator_solidity/validator.py:method:SolidityValidator.supported_extensions:returns=tuple[str, Ellipsis]"
+        ],
+        "artifacts_removed": [
+          "src/maid_validator_solidity/validator.py:method:SolidityValidator.supported_extensions:returns=tuple[str, ...]"
+        ],
+        "files_added": [],
+        "files_removed": [],
+        "validate_commands_added": [],
+        "validate_commands_removed": []
+      }
+    },
+    {
+      "prior_manifest_hash": "sha256-contract:cd0eef29f11cad683390525ec8e5b8d2d09f5fb6169d60e4e191e23a38713e40",
+      "prior_test_hashes": {
+        "tests/test_implementation.py": "sha256-pyast:v2:503cf571fd72c7124a3a3d255af955ea6becac78dfb265d2758fd0f96dc09f40",
+        "tests/test_behavioral.py": "sha256-pyast:v2:463e29e34a8265f3166fd61508a456698eaa46db9d92094314622a323077b112",
+        "tests/test_types.py": "sha256-pyast:v2:78ab2e249e9e7701142d48dd94d6fac86f3164e592b7e7db78144f22ca8160f3",
+        "tests/test_conformance.py": "sha256-pyast:v2:ab3fba36e1949c846a2fc101c430222b6d9585d825351ed408e18b10cf3c8f17",
+        "tests/test_registration.py": "sha256-pyast:v2:affda34ee68b0a0442a8996e9bccbbdd70e9395931fb7fd37a82eda71999582a"
+      },
+      "revised_at": "2026-09-28T11:09:44.040040+00:00",
+      "reason": "Add failing regressions for try-return/catch lexical shadowing within the approved contract; expose the unchanged public conformance-kit assertions through an assertion helper.",
+      "agent": null,
+      "contract_delta": {
+        "artifacts_added": [],
+        "artifacts_removed": [],
+        "files_added": [],
+        "files_removed": [],
+        "validate_commands_added": [],
+        "validate_commands_removed": []
+      }
+    },
+    {
+      "prior_manifest_hash": "sha256-contract:cd0eef29f11cad683390525ec8e5b8d2d09f5fb6169d60e4e191e23a38713e40",
+      "prior_test_hashes": {
+        "tests/test_implementation.py": "sha256-pyast:v2:503cf571fd72c7124a3a3d255af955ea6becac78dfb265d2758fd0f96dc09f40",
+        "tests/test_behavioral.py": "sha256-pyast:v2:a9039fe3a10b531af9ff74b2a87130acbbf8bebe6fcc219b9dc42fdb07bebb4c",
+        "tests/test_types.py": "sha256-pyast:v2:78ab2e249e9e7701142d48dd94d6fac86f3164e592b7e7db78144f22ca8160f3",
+        "tests/test_conformance.py": "sha256-pyast:v2:8543294acaac6cb13535e3b83b0920237c2b91ff78ebfee5531fe1e10eb6888d",
+        "tests/test_registration.py": "sha256-pyast:v2:affda34ee68b0a0442a8996e9bccbbdd70e9395931fb7fd37a82eda71999582a"
+      },
+      "revised_at": "2026-09-28T11:14:18.826634+00:00",
+      "reason": "Add failing within-contract regressions for typed fallback returns, named return bindings, nested type identities, and chained constructor receivers with call options.",
+      "agent": null,
+      "contract_delta": {
+        "artifacts_added": [],
+        "artifacts_removed": [],
+        "files_added": [],
+        "files_removed": [],
+        "validate_commands_added": [],
+        "validate_commands_removed": []
+      }
+    },
+    {
+      "prior_manifest_hash": "sha256-contract:cd0eef29f11cad683390525ec8e5b8d2d09f5fb6169d60e4e191e23a38713e40",
+      "prior_test_hashes": {
+        "tests/test_implementation.py": "sha256-pyast:v2:53b3c69b4d64f429efd2c76b75acc4bca0bbe6d97f580f800de9e550ccc7c95c",
+        "tests/test_behavioral.py": "sha256-pyast:v2:49a456bc88a036e7acecac3e42a755acf40a76379573b601621e28d8c8998474",
+        "tests/test_types.py": "sha256-pyast:v2:78ab2e249e9e7701142d48dd94d6fac86f3164e592b7e7db78144f22ca8160f3",
+        "tests/test_conformance.py": "sha256-pyast:v2:8543294acaac6cb13535e3b83b0920237c2b91ff78ebfee5531fe1e10eb6888d",
+        "tests/test_registration.py": "sha256-pyast:v2:affda34ee68b0a0442a8996e9bccbbdd70e9395931fb7fd37a82eda71999582a"
+      },
+      "revised_at": "2026-09-28T11:15:58.999215+00:00",
+      "reason": "Add a failing regression ensuring nested qualified type names do not bypass the existing private-name snapshot rule.",
+      "agent": null,
+      "contract_delta": {
+        "artifacts_added": [],
+        "artifacts_removed": [],
+        "files_added": [],
+        "files_removed": [],
+        "validate_commands_added": [],
+        "validate_commands_removed": []
+      }
+    }
+  ],
+  "red_evidence": {
+    "red": true,
+    "captured_at": "2026-09-28T11:15:59.323804+00:00",
+    "commands": [
+      {
+        "command": "uv run python -m pytest tests/ -q",
+        "exit_code": 1,
+        "output_tail": "=================================== FAILURES ===================================\n____ test_nested_private_names_and_their_fields_are_excluded_from_snapshots ____\n\n    def test_nested_private_names_and_their_fields_are_excluded_from_snapshots():\n        from maid_validator_solidity.validator import SolidityValidator\n    \n        snapshot = SolidityValidator().generate_snapshot(\n            \"contract Vault { struct _Hidden { uint amount; } enum _State { Open, Closed } }\",\n            \"Vault.sol\",\n        )\n>       assert snapshot == [{\"kind\": \"class\", \"name\": \"Vault\"}]\nE       AssertionError: assert [{'kind': 'cl...ault._State'}] == [{'kind': 'cl...me': 'Vault'}]\nE         \nE         Left contains 3 more items, first extra item: {'kind': 'class', 'name': 'Vault._Hidden'}\nE         Use -v to get more diff\n\ntests/test_implementation.py:225: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_implementation.py::test_nested_private_names_and_their_fields_are_excluded_from_snapshots\n1 failed, 86 passed in 0.15s",
+        "classification": "red"
+      }
+    ]
+  },
+  "legacy_baseline": null,
+  "agent": null,
+  "_manifest_contract": {
+    "artifacts": [
+      "src/maid_validator_solidity/__init__.py:class:SolidityValidator",
+      "src/maid_validator_solidity/__init__.py:class:SolidityValidator:kind=class",
+      "src/maid_validator_solidity/validator.py:class:SolidityValidator",
+      "src/maid_validator_solidity/validator.py:class:SolidityValidator:base=BaseValidator",
+      "src/maid_validator_solidity/validator.py:class:SolidityValidator:kind=class",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_behavioral_artifacts",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_behavioral_artifacts:arg=file_path:type=str | Path:default=None",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_behavioral_artifacts:arg=source:type=str:default=None",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_behavioral_artifacts:kind=method",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_behavioral_artifacts:of=SolidityValidator",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_behavioral_artifacts:returns=CollectionResult",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_implementation_artifacts",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_implementation_artifacts:arg=file_path:type=str | Path:default=None",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_implementation_artifacts:arg=source:type=str:default=None",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_implementation_artifacts:kind=method",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_implementation_artifacts:of=SolidityValidator",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.collect_implementation_artifacts:returns=CollectionResult",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.supported_extensions",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.supported_extensions:kind=method",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.supported_extensions:of=SolidityValidator",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.supported_extensions:returns=tuple[str, Ellipsis]",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.types_match",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.types_match:arg=implementation_type:type=str | None:default=None",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.types_match:arg=manifest_type:type=str | None:default=None",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.types_match:kind=method",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.types_match:of=SolidityValidator",
+      "src/maid_validator_solidity/validator.py:method:SolidityValidator.types_match:returns=bool"
+    ],
+    "files": {
+      "create": [
+        "src/maid_validator_solidity/__init__.py",
+        "src/maid_validator_solidity/validator.py"
+      ],
+      "edit": [],
+      "read": [
+        "tests/test_behavioral.py",
+        "tests/test_conformance.py",
+        "tests/test_implementation.py",
+        "tests/test_registration.py",
+        "tests/test_types.py"
+      ],
+      "scope": [
+        ".gitignore",
+        "CHANGELOG.md",
+        "LICENSE",
+        "README.md",
+        "pyproject.toml",
+        "src/maid_validator_solidity/_behavioral.py",
+        "src/maid_validator_solidity/_implementation.py",
+        "src/maid_validator_solidity/_parse.py",
+        "src/maid_validator_solidity/_types.py",
+        "uv.lock"
+      ],
+      "delete": [],
+      "snapshot": []
+    },
+    "file_contract": {
+      "create": [
+        {
+          "path": "src/maid_validator_solidity/__init__.py",
+          "artifacts": [
+            {
+              "kind": "class",
+              "name": "SolidityValidator"
+            }
+          ]
+        },
+        {
+          "path": "src/maid_validator_solidity/validator.py",
+          "artifacts": [
+            {
+              "kind": "class",
+              "name": "SolidityValidator",
+              "bases": [
+                "BaseValidator"
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "supported_extensions",
+              "of": "SolidityValidator",
+              "returns": "tuple[str, Ellipsis]"
+            },
+            {
+              "kind": "method",
+              "name": "collect_implementation_artifacts",
+              "of": "SolidityValidator",
+              "args": [
+                {
+                  "name": "source",
+                  "type": "str"
+                },
+                {
+                  "name": "file_path",
+                  "type": "str | Path"
+                }
+              ],
+              "returns": "CollectionResult"
+            },
+            {
+              "kind": "method",
+              "name": "collect_behavioral_artifacts",
+              "of": "SolidityValidator",
+              "args": [
+                {
+                  "name": "source",
+                  "type": "str"
+                },
+                {
+                  "name": "file_path",
+                  "type": "str | Path"
+                }
+              ],
+              "returns": "CollectionResult"
+            },
+            {
+              "kind": "method",
+              "name": "types_match",
+              "of": "SolidityValidator",
+              "args": [
+                {
+                  "name": "manifest_type",
+                  "type": "str | None"
+                },
+                {
+                  "name": "implementation_type",
+                  "type": "str | None"
+                }
+              ],
+              "returns": "bool"
+            }
+          ]
+        }
+      ],
+      "read": [
+        "tests/test_implementation.py",
+        "tests/test_behavioral.py",
+        "tests/test_types.py",
+        "tests/test_conformance.py",
+        "tests/test_registration.py"
+      ],
+      "scope": [
+        {
+          "path": "src/maid_validator_solidity/_parse.py",
+          "reason": "Private parser adapter; invalid syntax is tested through the public validator."
+        },
+        {
+          "path": "src/maid_validator_solidity/_implementation.py",
+          "reason": "Private declaration traversal, exercised through the public implementation collector."
+        },
+        {
+          "path": "src/maid_validator_solidity/_behavioral.py",
+          "reason": "Private reference traversal and lexical bindings, exercised through the public behavioral collector."
+        },
+        {
+          "path": "src/maid_validator_solidity/_types.py",
+          "reason": "Private Solidity type normalization, exercised through the public types_match method."
+        },
+        {
+          "path": "pyproject.toml",
+          "reason": "Distribution metadata, plugin entry point, dependencies, build and test configuration."
+        },
+        {
+          "path": "uv.lock",
+          "reason": "Reproducible published dependency graph."
+        },
+        {
+          "path": ".gitignore",
+          "reason": "Exclude virtual environments, generated builds and advisory MAID data."
+        },
+        {
+          "path": "README.md",
+          "reason": "Installation, declared mappings, validation commands and truthful support limits."
+        },
+        {
+          "path": "LICENSE",
+          "reason": "MIT license matching the C# plugin."
+        },
+        {
+          "path": "CHANGELOG.md",
+          "reason": "Initial 0.1.0 release notes without claiming publication."
+        }
+      ]
+    },
+    "test_files": [
+      "tests/test_behavioral.py",
+      "tests/test_conformance.py",
+      "tests/test_implementation.py",
+      "tests/test_registration.py",
+      "tests/test_types.py"
+    ],
+    "validate_commands": [
+      "uv run python -m pytest tests/ -q"
+    ],
+    "acceptance_commands": []
+  }
+}

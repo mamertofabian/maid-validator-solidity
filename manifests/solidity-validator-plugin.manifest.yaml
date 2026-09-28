@@ -1,0 +1,247 @@
+# manifest-kind: implementation
+# MAID manifest - a machine-checked contract for one change.
+# Declares the intent, the files it may touch, and the commands that verify it.
+# Nothing here is needed to build or run this project; safe to ignore.
+# What it is: https://github.com/mamertofabian/maid-runner
+schema: "2"
+type: feature
+created: "2026-09-28T10:58:10Z"
+goal: Provide an independently installable Solidity validator plugin for MAID Runner.
+description: |
+  Create maid-validator-solidity 0.1.0 as a sibling of maid-validator-csharp.
+  Register SolidityValidator for .sol files through maid_runner.validators.
+  Use tree-sitter-solidity instead of requiring successful compilation: MAID's
+  behavioral phase must inspect tests before the functions they exercise exist.
+  The grammar was probed against all 16 first-party source and 7 Foundry test
+  files in snider-launch without parse errors. No Solidity compiler, blockchain
+  connection, generated build artifacts, or downloads are needed at collection time.
+
+  Collect contracts/libraries and structs as classes, interfaces, enums,
+  user-defined value types, public state variables, struct fields, free functions,
+  constructors, receive/fallback functions, public/external contract methods,
+  and non-private library functions including internal library APIs. Qualify nested
+  type names with their containing type to avoid sibling-name collisions.
+  Preserve raw argument types including data locations. Canonical definition
+  signatures normalize uint/int/byte aliases and omit data locations; they are
+  source signature discriminators, not ABI selectors. Return void for no returns,
+  the declared type for one return, and a parenthesized list for multiple returns.
+
+  Behavioral collection recognizes public/external test*, testFuzz*, and invariant*
+  methods and their setUp fixture. Resolve only source-visible import aliases,
+  constructor expressions, explicitly typed receivers, casts, and direct library
+  calls. Respect lexical shadowing and isolation across contracts, methods, and
+  blocks. Do not infer receiver types from variable names, trace arbitrary helper
+  call graphs, or infer exact overload signatures. Calls remain unsigned so exact
+  overload manifests fail visibly when compiler evidence would be required.
+
+  Version 0.1 explicitly does not model event/error/modifier artifacts, inherited
+  receiver fields declared in other files, using-for extension binding, generated
+  getter-to-state-variable behavioral binding, or Hardhat JavaScript test binding.
+  Document these limits and unresolved-reference coverage consequences. Existing
+  Solidity syntax containing these constructs must still parse and expose the
+  supported declarations. Foundry and Slither remain the executable contract checks.
+
+  Package with Python >=3.10, maid-runner >=2.24,<3, tree-sitter >=0.25,<0.26,
+  and tree-sitter-solidity >=1.2.13,<2. Match C# plugin src-layout and uv workflow.
+  Finish README installation/use/mapping/limitations, MIT license and initial
+  changelog. Prove package entry-point discovery, conformance, wheel contents,
+  and read-only collection against snider-launch. Do not edit either existing
+  repository, publish a package, create remote repositories, or commit/push.
+
+  Packaging metadata and behavioral tests are preparation scaffolding; production
+  collectors are absent until this plan is approved. The plugin is not yet usable.
+  Runner 2.27.6 was checked: its is_test_file rejects test/Vault.t.sol and its
+  test-runner classifier rejects forge test. Runner integration is therefore a
+  separate prerequisite for full Foundry manifest validation; the plugin can
+  supply collection, snapshots, and discovery without bypassing those checks.
+temptations:
+  - risk: Guess a receiver's contract from its variable name or emit every possible owner.
+    instead: Resolve the nearest explicit lexical binding and test negative owner identities.
+  - risk: Claim an exact overload from argument count or literals.
+    instead: Keep behavioral signatures unset and document that exact coverage requires compiler evidence.
+  - risk: Treat parser recovery, comments, imports, or uninvoked helpers as behavioral evidence.
+    instead: Return no artifacts on parse errors and test these false-positive sources explicitly.
+  - risk: Drop internal library functions because contracts hide their internal methods.
+    instead: Model Solidity library APIs separately and exercise an internal math-library method.
+  - risk: Claim full Foundry integration from successful direct collection alone.
+    instead: Verify installed discovery and document Runner command-discovery gaps without weakening its checks.
+files:
+  create:
+    - path: src/maid_validator_solidity/__init__.py
+      artifacts:
+        - kind: class
+          name: SolidityValidator
+    - path: src/maid_validator_solidity/validator.py
+      artifacts:
+        - kind: class
+          name: SolidityValidator
+          bases: [BaseValidator]
+        - kind: method
+          name: supported_extensions
+          of: SolidityValidator
+          args: []
+          returns: tuple[str, Ellipsis]
+        - kind: method
+          name: collect_implementation_artifacts
+          of: SolidityValidator
+          args:
+            - {name: source, type: str}
+            - {name: file_path, type: "str | Path"}
+          returns: CollectionResult
+        - kind: method
+          name: collect_behavioral_artifacts
+          of: SolidityValidator
+          args:
+            - {name: source, type: str}
+            - {name: file_path, type: "str | Path"}
+          returns: CollectionResult
+        - kind: method
+          name: types_match
+          of: SolidityValidator
+          args:
+            - {name: manifest_type, type: "str | None"}
+            - {name: implementation_type, type: "str | None"}
+          returns: bool
+  scope:
+    - path: src/maid_validator_solidity/_parse.py
+      reason: Private parser adapter; invalid syntax is tested through the public validator.
+    - path: src/maid_validator_solidity/_implementation.py
+      reason: Private declaration traversal, exercised through the public implementation collector.
+    - path: src/maid_validator_solidity/_behavioral.py
+      reason: Private reference traversal and lexical bindings, exercised through the public behavioral collector.
+    - path: src/maid_validator_solidity/_types.py
+      reason: Private Solidity type normalization, exercised through the public types_match method.
+    - path: pyproject.toml
+      reason: Distribution metadata, plugin entry point, dependencies, build and test configuration.
+    - path: uv.lock
+      reason: Reproducible published dependency graph.
+    - path: .gitignore
+      reason: Exclude virtual environments, generated builds and advisory MAID data.
+    - path: README.md
+      reason: Installation, declared mappings, validation commands and truthful support limits.
+    - path: LICENSE
+      reason: MIT license matching the C# plugin.
+    - path: CHANGELOG.md
+      reason: Initial 0.1.0 release notes without claiming publication.
+  read:
+    - tests/test_implementation.py
+    - tests/test_behavioral.py
+    - tests/test_types.py
+    - tests/test_conformance.py
+    - tests/test_registration.py
+validate:
+  - [uv, run, python, -m, pytest, tests/, -q]
+outcome:
+  status: completed
+  summary: Implemented the separately packaged SolidityValidator 0.1.0 with declaration
+    collection, bounded Foundry references, type comparison, entry-point discovery,
+    and documented support limits. All 87 behavioral/conformance tests pass; independent
+    implementation review is ready.
+  rationale: The plugin parses source before implementation exists and does not require
+    a Solidity compiler. Runtime-only wheel installation works on Python 3.10. Read-only
+    installed-wheel collection accepted all 16 Snider source files (168 artifacts)
+    and 7 test files (522 references). Git changed-scope/assess checks are unavailable
+    because this new directory has no Git history; all seven non-Git handoff stages
+    pass with plan-lock and red-evidence enforcement. Full Foundry workflow integration
+    remains outside this contract because Runner 2.27.6 does not recognize .t.sol
+    test files or forge test.
+  lessons:
+  - lesson_type: design
+    summary: Keep lexical type/value bindings separate per contract, block, named
+      return, try success branch, and catch clause; primitive bindings must shadow
+      imported aliases too. Regression tests verify both positive owners and forbidden
+      owners.
+    tags:
+    - solidity
+    - identity
+    - lexical-scope
+    paths:
+    - src/maid_validator_solidity/_behavioral.py
+    - tests/test_behavioral.py
+  - lesson_type: implementation
+    summary: Solidity typed fallback parameters have a flat grammar shape unlike ordinary
+      function returns. A shared parameter adapter separates inputs and outputs without
+      guessing from type or parameter names.
+    tags:
+    - solidity
+    - tree-sitter
+    paths:
+    - src/maid_validator_solidity/_parse.py
+    - tests/test_implementation.py
+  - lesson_type: validation
+    summary: 'Test the wheel without development dependencies as well as under pytest:
+      pytest supplied tomli and initially masked a Python 3.10 runtime dependency.
+      The package now declares conditional tomli support, matching the C# plugin.'
+    tags:
+    - packaging
+    - python310
+    paths:
+    - pyproject.toml
+  review_notes:
+  - source: independent-implementation-review
+    severity: needs-changes
+    summary: Review identified typed fallback outputs, named return bindings, nested
+      type owner resolution, and chained constructor call options. Focused failing
+      regressions were added and locked before correcting those cases.
+  - source: independent-package-review
+    severity: ready
+    summary: No blocking findings in the declared 0.1 scope. Reviewer independently
+      ran 87 tests, lint/format checks, implementation validation, manifest tests,
+      and additional source probes.
+  - source: independent-package-review
+    severity: advisory
+    summary: Same-file free-function calls are a future behavioral collection extension;
+      this limitation is documented and does not expand the approved initial scope.
+  validation:
+  - command:
+    - uv
+    - run
+    - python
+    - -m
+    - pytest
+    - tests/
+    - -q
+    status: passed
+    summary: 87 tests pass on Python 3.14.3. The built wheel also passes the same
+      87 tests in isolated Python 3.10.16 with source-path injection disabled.
+  - command:
+    - uv
+    - run
+    - maid
+    - verify
+    - --profile
+    - handoff
+    - --no-changed-scope
+    - --test-scope
+    - repository
+    - --packet
+    status: passed
+    summary: Schema, behavioral, implementation, coherence, file tracking, plan lock,
+      and tests pass. E708 discloses repository-wide lock enforcement without Git
+      metadata; Git changed-scope verification is not claimed.
+  - command:
+    - uv
+    - run
+    - ruff
+    - check
+    - src/
+    - tests/
+    status: passed
+    summary: No lint findings.
+  - command:
+    - uv
+    - run
+    - black
+    - --check
+    - src/
+    - tests/
+    status: passed
+    summary: All 11 source/test files comply.
+  - command:
+    - uv
+    - build
+    status: passed
+    summary: Wheel and sdist build. Wheel contains six Python modules, MIT license,
+      metadata and entry point; runtime-only Python 3.10 installation imports/discovers
+      without pytest.
+  completed_at: '2026-09-28T11:19:11.278820Z'

@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.maid/outcomes.json
+.maid/outcomes-digest.json
+.maid/outcomes-digest.md
+.maid/run-review.json
+.maid/run-reviews/
