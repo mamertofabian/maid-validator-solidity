@@ -108,3 +108,15 @@ The tests include MAID Runner's public conformance kit. The active implementatio
 contract is [solidity-validator-plugin.manifest.yaml](manifests/solidity-validator-plugin.manifest.yaml).
 Changes follow MAID's plan, red evidence, lock, implementation, review, and Outcome
 workflow. Commits and publishing require explicit approval.
+
+## Repository MAID tooling
+
+Repo-local Claude and Codex skills, guidance, and hooks are installed. Use
+`uv run maid init --check` to check the installed payload. For each coding task,
+run `uv run maid assess --since <baseline>` and the verify command it recommends.
+Git and Claude hooks invoke `scripts/maid`, which runs `uv run --locked maid`
+from the repository root so the Solidity plugin is available without manual
+environment activation. The pre-commit configuration runs MAID's pre-commit
+profile; this machine's existing Git hook dispatcher already invokes it. On a
+fresh machine, install pre-commit (for example, `uv tool install pre-commit`) and
+run `pre-commit install` when no existing dispatcher is configured.

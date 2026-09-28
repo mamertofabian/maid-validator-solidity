@@ -6,8 +6,20 @@ build/
 dist/
 .pytest_cache/
 .ruff_cache/
+
+# Local agent state
+.claude/insights/
+.claude/settings.local.json
+.maid/active-manifest
+.maid/last-failure-packet.json
+
+# BEGIN MAID RUNNER GENERATED FILES
 .maid/outcomes.json
 .maid/outcomes-digest.json
 .maid/outcomes-digest.md
+.maid/outcomes-enrichment-prompt.json
+.maid/run-review-request.json
 .maid/run-review.json
 .maid/run-reviews/
+.maid/cache/
+# END MAID RUNNER GENERATED FILES
