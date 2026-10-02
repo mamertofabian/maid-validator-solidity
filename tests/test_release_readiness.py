@@ -296,8 +296,10 @@ def test_operator_docs_have_exact_solidity_setup_and_foundry_prerequisites() -> 
         ("Environment name", "pypi"),
     ):
         assert f"- {label}: `{value}`" in releasing
-    assert "0.1.0 is a prepared release candidate, not yet published." in releasing
+    assert "0.1.0 is published on PyPI and GitHub." in releasing
     readme = (ROOT / "README.md").read_text()
+    assert "prepared release candidate" not in readme
+    assert "publication is pending" not in readme.lower()
     assert "RELEASING.md" in readme
     assert "CHANGELOG.md" in readme
     assert "2.27.7" in readme

@@ -3,8 +3,9 @@
 Solidity (`.sol`) language validator for MAID Runner, backed by
 [`tree-sitter-solidity`](https://github.com/JoranHonig/tree-sitter-solidity).
 This separate Python package uses the same `maid_runner.validators` entry-point
-mechanism as `maid-validator-csharp`. Version 0.1.0 is a prepared release
-candidate; publication is pending the release workflow.
+mechanism as `maid-validator-csharp`. Version 0.1.0 is published on
+[PyPI](https://pypi.org/project/maid-validator-solidity/0.1.0/) and
+[GitHub](https://github.com/mamertofabian/maid-validator-solidity/releases/tag/v0.1.0).
 
 Collection reads supplied source without invoking a compiler, downloading
 dependencies, or reading generated build artifacts. Tests can therefore refer to
@@ -12,7 +13,7 @@ contracts and methods that have not been implemented yet.
 
 ## Install
 
-After publication, install from PyPI in the same environment as MAID:
+Install from PyPI in the same environment as MAID:
 
 ```sh
 uv add --dev maid-validator-solidity

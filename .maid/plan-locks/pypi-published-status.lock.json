@@ -1,0 +1,106 @@
+{
+  "manifest_path": "manifests/pypi-published-status.manifest.yaml",
+  "manifest_hash": "sha256-contract:4cf518832c3567ff1ce0dee419a30b7ccc24d3d2c67595618982421022f4be58",
+  "test_hashes": {
+    "tests/test_release_readiness.py": "sha256-pyast:v2:2caf9383b5af138b43b5ff84b89ec4061f23f2cbccece8e73d46122afbd44ce0"
+  },
+  "created_at": "2026-10-02T00:46:33.501634+00:00",
+  "revision": 2,
+  "revisions": [
+    {
+      "prior_manifest_hash": "sha256-contract:fa6c283600489c604318dffc7486b5f05af328416f520b0bb14a659369c8a6b3",
+      "prior_test_hashes": {
+        "tests/test_release_readiness.py": "sha256-pyast:v2:2caf9383b5af138b43b5ff84b89ec4061f23f2cbccece8e73d46122afbd44ce0"
+      },
+      "revised_at": "2026-10-02T00:46:34.146917+00:00",
+      "reason": "Migrated by maid manifest promote: manifests/drafts/pypi-published-status.manifest.yaml -> manifests/pypi-published-status.manifest.yaml",
+      "agent": null,
+      "contract_delta": {
+        "artifacts_added": [],
+        "artifacts_removed": [],
+        "files_added": [],
+        "files_removed": [],
+        "validate_commands_added": [],
+        "validate_commands_removed": []
+      }
+    }
+  ],
+  "red_evidence": {
+    "red": true,
+    "captured_at": "2026-10-02T00:46:33.924650+00:00",
+    "commands": [
+      {
+        "command": "uv run python -m pytest tests/test_release_readiness.py -q",
+        "exit_code": 1,
+        "output_tail": "            \"2.27.7\",\n            \"not yet published\",\n        ):\n            assert value in releasing\n        assert \"maid-validator-csharp\" in releasing\n        for label, value in (\n            (\"PyPI project name\", \"maid-validator-solidity\"),\n            (\"GitHub owner\", \"mamertofabian\"),\n            (\"GitHub repository\", \"maid-validator-solidity\"),\n            (\"Workflow filename\", \"publish.yml\"),\n            (\"Environment name\", \"pypi\"),\n        ):\n            assert f\"- {label}: `{value}`\" in releasing\n>       assert \"0.1.0 is published on PyPI and GitHub.\" in releasing\nE       AssertionError: assert '0.1.0 is published on PyPI and GitHub.' in '# Releasing\\n\\nThis uses the same layout and release route as `maid-validator-csharp`:\\n`.github/workflows/ci.yml`, `...try an immutable version\\nblindly. A pending publisher and successful local build are preparation, not\\npublication.\\n'\n\ntests/test_release_readiness.py:299: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_release_readiness.py::test_operator_docs_have_exact_solidity_setup_and_foundry_prerequisites\n1 failed, 12 passed in 0.26s",
+        "classification": "red"
+      }
+    ]
+  },
+  "legacy_baseline": null,
+  "agent": null,
+  "_manifest_contract": {
+    "artifacts": [],
+    "files": {
+      "create": [],
+      "edit": [],
+      "read": [
+        "LICENSE",
+        "src/maid_validator_solidity/validator.py",
+        "tests/test_release_readiness.py",
+        "uv.lock"
+      ],
+      "scope": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/publish.yml",
+        "CHANGELOG.md",
+        "README.md",
+        "RELEASING.md",
+        "pyproject.toml"
+      ],
+      "delete": [],
+      "snapshot": []
+    },
+    "file_contract": {
+      "read": [
+        "tests/test_release_readiness.py",
+        "uv.lock",
+        "LICENSE",
+        "src/maid_validator_solidity/validator.py"
+      ],
+      "scope": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "reason": "C#-style Python matrix and locked test/lint/MAID checks."
+        },
+        {
+          "path": ".github/workflows/publish.yml",
+          "reason": "Guarded tag-triggered build, isolated smoke, OIDC publish, and GitHub release."
+        },
+        {
+          "path": "pyproject.toml",
+          "reason": "Replicable package metadata and pinned build tools without collector API changes."
+        },
+        {
+          "path": "README.md",
+          "reason": "Package installation and release links with accurate publication and Runner state."
+        },
+        {
+          "path": "CHANGELOG.md",
+          "reason": "Record the verified published release and retain release automation history."
+        },
+        {
+          "path": "RELEASING.md",
+          "reason": "Exact one-time Trusted Publisher values and reproducible release checklist."
+        }
+      ]
+    },
+    "test_files": [
+      "tests/test_release_readiness.py"
+    ],
+    "validate_commands": [
+      "uv run python -m pytest tests/test_release_readiness.py -q"
+    ],
+    "acceptance_commands": []
+  }
+}

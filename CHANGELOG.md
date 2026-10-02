@@ -2,7 +2,8 @@
 
 ## 0.1.0 — 2026-10-02
 
-Prepared release candidate; publication is pending the release workflow.
+Published to [PyPI](https://pypi.org/project/maid-validator-solidity/0.1.0/) with
+matching [GitHub release assets](https://github.com/mamertofabian/maid-validator-solidity/releases/tag/v0.1.0).
 
 - Register `.sol` support through MAID Runner's external validator entry point.
 - Collect Solidity declarations with tree-sitter-solidity, including internal

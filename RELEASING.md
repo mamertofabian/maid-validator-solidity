@@ -5,7 +5,15 @@ This uses the same layout and release route as `maid-validator-csharp`:
 and PyPI Trusted Publisher authentication. Do not add a PyPI API token to
 repository secrets.
 
-0.1.0 is a prepared release candidate, not yet published.
+0.1.0 is published on PyPI and GitHub.
+
+- [PyPI 0.1.0](https://pypi.org/project/maid-validator-solidity/0.1.0/)
+- [GitHub v0.1.0](https://github.com/mamertofabian/maid-validator-solidity/releases/tag/v0.1.0)
+- [Successful release workflow](https://github.com/mamertofabian/maid-validator-solidity/actions/runs/36947382779)
+
+Public-index installation discovers active `SolidityValidator 0.1.0` for `.sol`;
+PyPI wheel/sdist hashes match the GitHub release assets. The setup below is
+already configured for this repository and serves as a template for new plugins.
 
 ## One-time setup
 

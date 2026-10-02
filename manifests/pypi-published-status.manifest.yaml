@@ -1,0 +1,84 @@
+# manifest-kind: implementation
+# MAID manifest - a machine-checked contract for one change.
+# Declares the intent, the files it may touch, and the commands that verify it.
+# Nothing here is needed to build or run this project; safe to ignore.
+# What it is: https://github.com/mamertofabian/maid-runner
+schema: '2'
+type: fix
+created: '2026-10-02T00:46:34Z'
+goal: Record verified 0.1.0 publication while retaining the complete C#-consistent release contract.
+description: |
+  The durable release-preparation contract required candidate wording before publication.
+  PyPI and GitHub now publish 0.1.0, so replace that candidate-only documentation
+  requirement while retaining all packaging, matrix, OIDC, artifact-lineage, guard,
+  and replication checks. Supersede the full release contract because its behavioral
+  test requires a state that must stop existing. No source collectors, dependencies,
+  workflow permissions, tags, or uploaded distributions change. Update README.md,
+  RELEASING.md, and CHANGELOG.md to accurate published status and release links.
+  User pre-approved all subsequent release steps, including this completion update.
+  External read-only templates remain the C# workflow and RELEASING.md files.
+temptations:
+- risk: Leave candidate-only tests or stale unpublished wording after successful publication.
+  instead: Capture a failing published-status test before documentation changes, retain all existing release checks, and supersede the durable preparation contract.
+- risk: Move the tag or replace already published release artifacts to update documentation.
+  instead: Update main only and leave v0.1.0 and its PyPI/GitHub artifacts immutable.
+files:
+  scope:
+  - path: .github/workflows/ci.yml
+    reason: C#-style Python matrix and locked test/lint/MAID checks.
+  - path: .github/workflows/publish.yml
+    reason: Guarded tag-triggered build, isolated smoke, OIDC publish, and GitHub release.
+  - path: pyproject.toml
+    reason: Replicable package metadata and pinned build tools without collector API changes.
+  - path: README.md
+    reason: Package installation and release links with accurate publication and Runner state.
+  - path: CHANGELOG.md
+    reason: Record the verified published release and retain release automation history.
+  - path: RELEASING.md
+    reason: Exact one-time Trusted Publisher values and reproducible release checklist.
+  read:
+  - tests/test_release_readiness.py
+  - uv.lock
+  - LICENSE
+  - src/maid_validator_solidity/validator.py
+validate:
+- - uv
+  - run
+  - python
+  - -m
+  - pytest
+  - tests/test_release_readiness.py
+  - -q
+outcome:
+  status: completed
+  summary: Recorded verified PyPI and GitHub publication of 0.1.0, replaced candidate-only wording and its test, and retained the complete C#-consistent release contract. The v0.1.0 tag and published distributions remain unchanged.
+  rationale: Release workflow 36947382779 succeeded at 7b2e02c. Public-index Python 3.10 discovery reports active SolidityValidator 0.1.0 for .sol. The PyPI wheel and sdist SHA256 values match the GitHub release asset digests exactly.
+  lessons:
+  - lesson_type: validation
+    summary: Separate immutable release artifacts from post-publication documentation. Evolve the durable candidate-state contract with genuine red evidence while retaining all executable release guards.
+    paths: [tests/test_release_readiness.py, README.md, RELEASING.md, CHANGELOG.md]
+  review_notes:
+  - source: release_plan_review
+    severity: ready
+    summary: Approved complete supersession with one genuine documentation red failure and twelve retained passing release cases; scope is documentation-only implementation.
+  - source: published_status_review
+    severity: ready
+    summary: Independent read-only review found no blocking or advisory findings; verified 13 release cases, implementation validation, nine handoff gates, public-index discovery, successful workflow, and matching PyPI/GitHub hashes.
+  validation:
+  - command: [uv, run, python, -m, pytest, tests/, -q]
+    status: passed
+    summary: All 100 tests pass after the published-status update; release guard coverage is retained.
+  - command: [uv, run, maid, verify, --profile, handoff, --manifest-dir, manifests, --since, 7b2e02c]
+    status: passed
+    summary: All nine assessed handoff gates pass with zero blocking findings or warnings. Additional deep verification also passes all eleven stages.
+  - command: [uv, run, ruff, check, src/, tests/]
+    status: passed
+    summary: No lint findings; Black also confirms all twelve Python files conform.
+  - command: [uv, run, --no-project, --python, '3.10', --with, maid-validator-solidity==0.1.0, maid, validators, --json]
+    status: passed
+    summary: Fresh public-index installation reports active SolidityValidator 0.1.0 with .sol support.
+  - command: [gh, run, watch, '36947382779', --repo, mamertofabian/maid-validator-solidity, --exit-status]
+    status: passed
+    summary: Python 3.10–3.14 release tests, distribution checks, isolated wheel discovery, protected OIDC publication, and GitHub Release creation succeeded. Wheel SHA256 is 830f09b5e219c9836657fc217a042c46c9766b5a463c4baecfa5b6f644c6d652; sdist SHA256 is 3e3b36935a6492517cde39490196b6d8dcc6cb57c87f26176d9018fff2f31420 on both services.
+supersedes:
+- pypi-release-route
