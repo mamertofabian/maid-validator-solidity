@@ -1,0 +1,106 @@
+{
+  "manifest_path": "manifests/pypi-release-route.manifest.yaml",
+  "manifest_hash": "sha256-contract:6de1e7d58260d5b0073c40037502dec7cdef971a85fbfd16ef118fa5d840375d",
+  "test_hashes": {
+    "tests/test_release_readiness.py": "sha256-pyast:v2:1eb8d9d9fe281264a5ea546dcb3494981443f37e1b8c9d6abc7525bdd80f700d"
+  },
+  "created_at": "2026-10-02T00:34:35.689651+00:00",
+  "revision": 2,
+  "revisions": [
+    {
+      "prior_manifest_hash": "sha256-contract:d2aae0ecbd31506ae81fe06b847be7ccc1201146ef1d2993c1024e365769c2d7",
+      "prior_test_hashes": {
+        "tests/test_release_readiness.py": "sha256-pyast:v2:1eb8d9d9fe281264a5ea546dcb3494981443f37e1b8c9d6abc7525bdd80f700d"
+      },
+      "revised_at": "2026-10-02T00:34:36.311788+00:00",
+      "reason": "Migrated by maid manifest promote: manifests/drafts/pypi-release-route.manifest.yaml -> manifests/pypi-release-route.manifest.yaml",
+      "agent": null,
+      "contract_delta": {
+        "artifacts_added": [],
+        "artifacts_removed": [],
+        "files_added": [],
+        "files_removed": [],
+        "validate_commands_added": [],
+        "validate_commands_removed": []
+      }
+    }
+  ],
+  "red_evidence": {
+    "red": true,
+    "captured_at": "2026-10-02T00:34:36.093663+00:00",
+    "commands": [
+      {
+        "command": "uv run python -m pytest tests/test_release_readiness.py -q",
+        "exit_code": 1,
+        "output_tail": ">       return io.open(self, mode, buffering, encoding, errors, newline)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       FileNotFoundError: [Errno 2] No such file or directory: '/home/atomrem/projects/codefrost-dev/maid-validator-solidity/RELEASING.md'\n\n../../../.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: FileNotFoundError\n=========================== short test summary info ============================\nFAILED tests/test_release_readiness.py::test_package_metadata_uses_replicable_published_dependencies\nFAILED tests/test_release_readiness.py::test_ci_and_release_test_every_supported_python_with_locked_gates\nFAILED tests/test_release_readiness.py::test_publish_orders_verified_artifacts_before_oidc_and_github_release\nFAILED tests/test_release_readiness.py::test_publish_version_guard_accepts_only_matching_tag[v0.1.0-True]\nFAILED tests/test_release_readiness.py::test_publish_version_guard_accepts_only_matching_tag[v9.9.9-False]\nFAILED tests/test_release_readiness.py::test_publish_ancestry_guard_rejects_unmerged_history[True]\nFAILED tests/test_release_readiness.py::test_publish_ancestry_guard_rejects_unmerged_history[False]\nFAILED tests/test_release_readiness.py::test_installed_wheel_guard_rejects_missing_or_broken_plugin[active]\nFAILED tests/test_release_readiness.py::test_installed_wheel_guard_rejects_missing_or_broken_plugin[inactive]\nFAILED tests/test_release_readiness.py::test_installed_wheel_guard_rejects_missing_or_broken_plugin[missing]\nFAILED tests/test_release_readiness.py::test_installed_wheel_guard_rejects_missing_or_broken_plugin[wrong-extension]\nFAILED tests/test_release_readiness.py::test_installed_wheel_guard_rejects_missing_or_broken_plugin[wrong-name]\nFAILED tests/test_release_readiness.py::test_operator_docs_have_exact_solidity_setup_and_foundry_prerequisites\n13 failed in 0.24s",
+        "classification": "red"
+      }
+    ]
+  },
+  "legacy_baseline": null,
+  "agent": null,
+  "_manifest_contract": {
+    "artifacts": [],
+    "files": {
+      "create": [],
+      "edit": [],
+      "read": [
+        "LICENSE",
+        "src/maid_validator_solidity/validator.py",
+        "tests/test_release_readiness.py",
+        "uv.lock"
+      ],
+      "scope": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/publish.yml",
+        "CHANGELOG.md",
+        "README.md",
+        "RELEASING.md",
+        "pyproject.toml"
+      ],
+      "delete": [],
+      "snapshot": []
+    },
+    "file_contract": {
+      "read": [
+        "tests/test_release_readiness.py",
+        "uv.lock",
+        "LICENSE",
+        "src/maid_validator_solidity/validator.py"
+      ],
+      "scope": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "reason": "C#-style Python matrix and locked test/lint/MAID checks."
+        },
+        {
+          "path": ".github/workflows/publish.yml",
+          "reason": "Guarded tag-triggered build, isolated smoke, OIDC publish, and GitHub release."
+        },
+        {
+          "path": "pyproject.toml",
+          "reason": "Replicable package metadata and pinned build tools without collector API changes."
+        },
+        {
+          "path": "README.md",
+          "reason": "Package installation and release links with accurate publication and Runner state."
+        },
+        {
+          "path": "CHANGELOG.md",
+          "reason": "Date the 0.1.0 release candidate and record release automation."
+        },
+        {
+          "path": "RELEASING.md",
+          "reason": "Exact one-time Trusted Publisher values and reproducible release checklist."
+        }
+      ]
+    },
+    "test_files": [
+      "tests/test_release_readiness.py"
+    ],
+    "validate_commands": [
+      "uv run python -m pytest tests/test_release_readiness.py -q"
+    ],
+    "acceptance_commands": []
+  }
+}

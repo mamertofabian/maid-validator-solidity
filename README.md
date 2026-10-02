@@ -3,13 +3,28 @@
 Solidity (`.sol`) language validator for MAID Runner, backed by
 [`tree-sitter-solidity`](https://github.com/JoranHonig/tree-sitter-solidity).
 This separate Python package uses the same `maid_runner.validators` entry-point
-mechanism as `maid-validator-csharp`. Version 0.1.0 is local and not published.
+mechanism as `maid-validator-csharp`. Version 0.1.0 is a prepared release
+candidate; publication is pending the release workflow.
 
 Collection reads supplied source without invoking a compiler, downloading
 dependencies, or reading generated build artifacts. Tests can therefore refer to
 contracts and methods that have not been implemented yet.
 
-## Install locally
+## Install
+
+After publication, install from PyPI in the same environment as MAID:
+
+```sh
+uv add --dev maid-validator-solidity
+# or use an isolated tool environment:
+uv tool install --with maid-validator-solidity 'maid-runner>=2.24,<3'
+maid validators
+```
+
+See [CHANGELOG.md](CHANGELOG.md) for history and [RELEASING.md](RELEASING.md)
+for the C#-style GitHub Actions and PyPI Trusted Publisher release checklist.
+
+### Install locally
 
 Install the plugin in the **same Python environment** as the MAID executable.
 For a project managed with uv:
@@ -82,6 +97,15 @@ test files nor `forge test` as a supported test runner. This package supplies
 language collection, snapshots, and plugin discovery. Full Foundry manifest
 validation needs separate Runner integration; installing the plugin alone does
 not remove that prerequisite.
+
+Local MAID Runner 2.27.7 adds `.sol` discovery, `*.t.sol` behavioral test
+classification, and `forge test` command support. It was verified with this
+plugin against `snider-launch`: all 16 source and 7 test files collected without
+errors, representative behavioral/implementation contracts passed, a missing
+method failed behavioral validation, and MAID executed all 59 Foundry tests.
+Runner 2.27.7 is not yet published; the package API floor remains `>=2.24,<3`.
+Full Foundry validation needs 2.27.7 or newer, while plugin collection and
+discovery work with the published dependency. See RELEASING.md before releasing.
 
 Version 0.1 does not model event, custom-error, or modifier artifacts. It does not
 resolve inherited fields from other files, `using for` bindings, generated getter

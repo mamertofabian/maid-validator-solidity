@@ -7,12 +7,31 @@ requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{name = "Mamerto Fabian Jr.", email = "mamerto@codefrost.com"}]
+keywords = ["maid", "maid-runner", "solidity", "validator", "tree-sitter", "plugin"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Quality Assurance",
+]
 dependencies = [
     "maid-runner>=2.24,<3",
     "tomli>=2; python_version < '3.11'",
     "tree-sitter>=0.25,<0.26",
     "tree-sitter-solidity>=1.2.13,<2",
 ]
+
+[project.urls]
+Homepage = "https://github.com/mamertofabian/maid-validator-solidity"
+Repository = "https://github.com/mamertofabian/maid-validator-solidity"
+Issues = "https://github.com/mamertofabian/maid-validator-solidity/issues"
+Changelog = "https://github.com/mamertofabian/maid-validator-solidity/blob/main/CHANGELOG.md"
 
 [project.entry-points."maid_runner.validators"]
 solidity = "maid_validator_solidity:SolidityValidator"
@@ -21,7 +40,7 @@ solidity = "maid_validator_solidity:SolidityValidator"
 dev = ["pytest>=8.4,<10", "black>=25", "ruff>=0.13"]
 
 [build-system]
-requires = ["setuptools>=77", "wheel"]
+requires = ["setuptools==83.0.0", "wheel==0.47.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]

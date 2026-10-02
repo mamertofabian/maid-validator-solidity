@@ -1,0 +1,94 @@
+# manifest-kind: implementation
+# MAID manifest - a machine-checked contract for one change.
+# Declares the intent, the files it may touch, and the commands that verify it.
+# Nothing here is needed to build or run this project; safe to ignore.
+# What it is: https://github.com/mamertofabian/maid-runner
+schema: "2"
+type: feature
+created: "2026-10-02T00:34:36Z"
+goal: Prepare Solidity plugin 0.1.0 with the C# plugin's replicable GitHub and PyPI Trusted Publisher release route.
+description: |
+  Use maid-validator-csharp as the release template: identical Python matrix,
+  SHA-pinned actions, locked published dependency resolution, tag/main and
+  version guards, distribution checks, isolated wheel discovery, minimal OIDC
+  permission, and GitHub release assets. No collector behavior changes.
+  Add focused release-readiness tests for configuration and executable version
+  guards, package metadata, and operator documentation. Keep the published
+  Runner floor at 2.24 for the plugin API; clearly distinguish collection from
+  full Foundry validation, which needs Runner 2.27.7 (not yet published).
+  Adapt package identifiers and operator setup values instead of copying stale
+  C# version/source-override claims. Date 0.1.0 as a prepared candidate; no
+  documentation may claim it is published before actual publication.
+  GitHub repository/environment and pending PyPI publisher are external setup.
+  This contract prepares their exact configuration without authorizing commits,
+  pushes, tags, or claiming publication. User explicitly requested preparation
+  and consistency with the C# route.
+  External read-only template dependencies (outside project-root files.read):
+  /home/atomrem/projects/codefrost-dev/maid-validator-csharp/.github/workflows/ci.yml
+  /home/atomrem/projects/codefrost-dev/maid-validator-csharp/.github/workflows/publish.yml
+  /home/atomrem/projects/codefrost-dev/maid-validator-csharp/RELEASING.md
+temptations:
+  - risk: Reuse PyPI credentials to bypass the selected OIDC route.
+    instead: Publish only from the pypi job with short-lived trusted-publisher credentials.
+  - risk: Copy C# identifiers or unreleased Runner overrides into the release.
+    instead: Test Solidity identities and index-only resolution and retain truthful Foundry prerequisites.
+  - risk: Treat the editable checkout as proof the wheel works.
+    instead: Require isolated wheel installation and active SolidityValidator discovery before publication.
+files:
+  scope:
+    - path: .github/workflows/ci.yml
+      reason: C#-style Python matrix and locked test/lint/MAID checks.
+    - path: .github/workflows/publish.yml
+      reason: Guarded tag-triggered build, isolated smoke, OIDC publish, and GitHub release.
+    - path: pyproject.toml
+      reason: Replicable package metadata and pinned build tools without collector API changes.
+    - path: README.md
+      reason: Package installation and release links with accurate publication and Runner state.
+    - path: CHANGELOG.md
+      reason: Date the 0.1.0 release candidate and record release automation.
+    - path: RELEASING.md
+      reason: Exact one-time Trusted Publisher values and reproducible release checklist.
+  read:
+    - tests/test_release_readiness.py
+    - uv.lock
+    - LICENSE
+    - src/maid_validator_solidity/validator.py
+validate:
+  - [uv, run, python, -m, pytest, tests/test_release_readiness.py, -q]
+outcome:
+  status: completed
+  summary: Prepared the C#-consistent 0.1.0 release route, package metadata, guarded OIDC workflows, replication instructions, and 13 release-readiness cases. Publication remains pending commit/push/tag approvals and the PyPI publisher binding.
+  rationale: Keep the established C# layout and job sequence while adapting Solidity identity and documenting the unpublished Runner 2.27.7 Foundry prerequisite. The public repository and tag-restricted, reviewer-protected pypi environment exist; no commits, pushes, release tags, or uploads were made.
+  lessons:
+    - lesson_type: validation
+      summary: Execute release guards against positive and negative inputs instead of relying on workflow substring checks. Temporary Git histories and missing/inactive/wrong-identity discovery results exercise rejection behavior.
+      paths: [tests/test_release_readiness.py, .github/workflows/publish.yml]
+    - lesson_type: validation
+      summary: The wheel passes 100 tests on Python 3.10 through 3.14 without source-path injection, including Python 3.10 with the minimum Runner 2.24.0. Runtime-only Python 3.10 installation discovers the plugin with conditional tomli present.
+      paths: [pyproject.toml, .github/workflows/publish.yml]
+  review_notes:
+    - source: release_plan_review
+      severity: needs-changes
+      summary: Initial plan review required executable ancestry/discovery controls, structural artifact handoff checks, and exact publisher labels. Tests were revised before locking; the second plan review approved the contract with genuine red evidence.
+    - source: release_implementation_review
+      severity: ready
+      summary: Independent read-only reviewer found no blocking or advisory findings after testing 100 cases, lint/format, deep MAID verification, fresh builds, metadata checks, and isolated Python 3.10 wheel discovery.
+  validation:
+    - command: [uv, run, python, -m, pytest, tests/, -q]
+      status: passed
+      summary: 100 tests pass. Installed-wheel runs also pass all 100 tests on Python 3.10, 3.11, 3.12, 3.13, and 3.14; minimum Runner 2.24.0 passes on Python 3.10.
+    - command: [uv, run, ruff, check, src/, tests/]
+      status: passed
+      summary: No lint findings.
+    - command: [uv, run, black, --check, src/, tests/]
+      status: passed
+      summary: All 12 Python files conform; Black emits a cross-version safety-check advisory on the local Python 3.14 interpreter.
+    - command: [uv, run, --with, coverage, maid, verify, --profile, deep, --manifest-dir, manifests, --test-scope, task, --require-plan-lock, --require-red-evidence, --since, HEAD]
+      status: passed
+      summary: All 11 stages pass with zero blocking findings or warnings. The first invocation exposed a missing optional coverage dependency, resolved using uv's ephemeral --with coverage environment.
+    - command: [uv, build, --out-dir, /tmp/maid-solidity-release-route-0.1.0]
+      status: passed
+      summary: Exactly one 0.1.0 wheel and sdist build with pinned C#-matching build tools; Twine 7.0.0 accepts both distributions. Runtime-only wheel installation discovers active SolidityValidator 0.1.0 for .sol.
+    - command: [uv, run, --no-project, --with, zizmor, zizmor, .github/workflows]
+      status: passed
+      summary: Offline workflow security audit reports no findings; online-only audit checks were not run.
